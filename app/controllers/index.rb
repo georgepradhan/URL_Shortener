@@ -15,5 +15,7 @@ end
 
 get '/:short_url' do
   row = Url.find_by_short_url(params[:short_url])
+  row.counter = row.counter + 1
+  row.save
   redirect "http://#{row.long_url}"
 end
