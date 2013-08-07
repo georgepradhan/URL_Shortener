@@ -7,4 +7,7 @@
   <% if @short %>
     <p> Your shortened url is: <a href= "/<%= @short %>"> <%= @short %> </a> </p>
   <% end %> 
+  <% if @errors %>
+    <p> You generated the following errors: <%= @errors %> </p>
+  <% end %> 
 </div>

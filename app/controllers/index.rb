@@ -5,11 +5,17 @@ end
 
 post '/urls' do
   #instantiate a URL object and in doing so generates short url (via before_save method)
-  long_url = params[:long_url].gsub(/http:\/\//, '')
+  long_url = params[:long_url].gsub(/https:\/\//, '').gsub(/http:\/\//, '')
   url = Url.new
   url.long_url = long_url
-  url.save
-  @short = url.short_url
+  
+  if !url.valid?
+    @errors = url.errors.messages
+  else
+    url.save
+    @short = url.short_url
+  end
+  
   erb :index
 end
 
